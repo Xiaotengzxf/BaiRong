@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7D0A6DF0905F9B736AB73FC6E8853503'
+               BlueprintIdentifier = 'E772E2D76A7292F78ABBE4065964F7D2'
                BlueprintName = 'RAReorderableLayout'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'RAReorderableLayout.framework'>

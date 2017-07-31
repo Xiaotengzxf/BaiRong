@@ -7,53 +7,17 @@
 //
 
 import UIKit
-import SwiftyJSON
 
 class mTabBarController: UITabBarController {
-
-    var timer : DispatchSourceTimer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
-//        timer?.scheduleRepeating(deadline: .now(), interval: .seconds(60))
-//        timer?.setEventHandler(handler: { 
-//            [weak self] in
-//            self?.requestPullTag()
-//        })
-//        timer?.resume()
-    }
-    
-    func requestPullTag() {
-        NetworkManager.installshared.request(type: .post, url: NetworkManager.installshared.appPullTag, params: nil){
-            [weak self] (json , error) in
-            if let object = json {
-                if let result = object["result"].int {
-                    if result == 1000 {
-                        var count = 0
-                        if let workOrderCount = object["data" , "WorkorderCount"].int {
-                            count += workOrderCount
-                            if workOrderCount > 0 {
-                                self?.tabBar.items?[2].badgeValue = "\(workOrderCount)"
-                            }else{
-                                self?.tabBar.items?[2].badgeValue = nil
-                            }
-                            NotificationCenter.default.post(name: Notification.Name(NotificationName.Index.rawValue), object: 1, userInfo: ["badge" : workOrderCount])
-                        }
-                        if let WorkflowCount = object["data" , "WorkflowCount"].int {
-                            count += WorkflowCount
-                            NotificationCenter.default.post(name: Notification.Name(NotificationName.Index.rawValue), object: 2, userInfo: ["badge" : WorkflowCount])
-                        }
-                    }
-                }
-            }
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(sender:)), name: Notification.Name("tabbar"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        timer?.cancel()
-        timer = nil
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,6 +28,16 @@ class mTabBarController: UITabBarController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func handleNotification(sender : Notification) {
+        if let tag = sender.object as? Int {
+            self.selectedIndex = tag
+        }
     }
     
 

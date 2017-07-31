@@ -13,13 +13,27 @@ import SwiftyJSON
 class NetworkManager {
     
     static let installshared = NetworkManager()
-    let urlPrefix = "http://api.mayikf.com/"
+    let urlPrefix = "http://119.23.124.249/cloud-app/"
     let null = ""
+    let appSendNews = "appSendNews.html"
+    let appCheckPhone = "appCheckPhone.html"
     let login = "appLogin.html" // 登录接口
     let appGetUserModel = "appGetUserModel.html"
+    let appSelFighistory = "appSelFighistory.html" // 查得明细
+    let appReportFigure = "appReportFigure.html" // 统计数据
+    let appFigureList = "appFigureList.html"  // 画像查询结果
+    let appProjectType = "appProjectType.html" // 画像查询结果
+    let appProjectList = "appProjectList.html" // 画像查询结果
+    let appSelMyAppoint = "appSelMyAppoint.html" // 预约登记
+    let appCustList = "appCustList.html" // 客户列表
+    let appMyTask = "appMyTask.html" // 新的任务
+    let appCustDetail = "appCustDetail.html" // 客户详情
+    let appSetOutIn = "appSetOutIn.html" // 室外办公模式
+    let appFigureUpdate = "appFigureUpdate.html"
+    let appCallResultConfig = "appCallResultConfig.html" 
+    let appGetOut = "appGetOut.html"
     let appPullTag = "appPullTag.html"
     let appUntreatedWO = "appUntreatedWO.html"
-    let appCustList = "appCustList.html"
     let appAddCust = "appAddCust.html"
     let appModifySelf = "appModifySelf.html"
     let appModifyAvatar = "appModifyAvatar.html"
@@ -81,30 +95,42 @@ class NetworkManager {
         }
     }
     
+    /*"rows": {
+     "companyid": "6",
+     "extension": "8002",
+     "phone": "18038004820",
+     "code": "415622"
+     }*/
     func request(type : HTTPMethod , url : String , params : Parameters? , callback : @escaping (JSON? , Error?)->())  {
-        let username = UserDefaults.standard.string(forKey: "username")!
-        let pwd = UserDefaults.standard.string(forKey: "pwd")!
-        var str = username + pwd
-        str = String(str.characters.reversed()) + url + "\(Int(NSDate().timeIntervalSince1970))"
-        str = Invalidate.randomMD5(identifierString: str)
         var paramters = params
         if paramters == nil {
             paramters = [:]
         }
-        var p = "\(urlPrefix + url)?"
-        for (key , value) in paramters! {
-            p += "\(key)=\(value)&"
+        if let mine = UserDefaults.standard.object(forKey: "mine") as? [String : Any] {
+            paramters?["companyid"] = mine["companyid"] as? String ?? ""
+            paramters?["myexten"] = mine["extension"] as? String ?? ""
+            paramters?["phone"] = mine["phone"] as? String ?? ""
+            paramters?["code"] = mine["code"] as? String ?? ""
+            paramters?["cacheDirName"] = "cache"
+            paramters?["URL"] = "http://"
         }
-        print(p)
-        paramters?["account"] = username
-        paramters?["passwd"] = pwd
-        paramters?["token"] = str.lowercased()
-        paramters?["domain"] = macAddress()
-        
+        if paramters?.count ?? 0 > 0 {
+            print("url:\(urlPrefix + url)")
+            print(paramters!)
+        }
         Alamofire.request(urlPrefix + url, method: type, parameters: paramters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             if let json = response.result.value {
                 print(json)
                 let object = JSON(json)
+                if let status = object["status"].int, status == 0 {
+                    if let info = object["info"].string, info == "你还没有登录app" {
+                        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                            appDelegate.setRootControllerWithLogin()
+                        }
+                        UserDefaults.standard.removeObject(forKey: "mine")
+                        return
+                    }
+                }
                 callback(object, nil)
             }else{
                 callback(nil , response.result.error)

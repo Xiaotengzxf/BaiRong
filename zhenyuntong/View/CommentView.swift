@@ -55,7 +55,7 @@ class CommentView: UIView {
         bottomLayoutConstraint.constant = 0
         UIView.animate(withDuration: duration, animations: { 
             self.layoutIfNeeded()
-        }) {[weak self] (finished) in
+        }) { (finished) in
             
         }
     }

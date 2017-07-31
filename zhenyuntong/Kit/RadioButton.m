@@ -49,6 +49,7 @@
 	if(![[self allTargets] containsObject:self]) {
 		[super addTarget:self action:@selector(onTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
 	}
+    [super awakeFromNib];
 }
 
 -(void) addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents

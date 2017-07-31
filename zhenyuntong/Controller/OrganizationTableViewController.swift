@@ -170,7 +170,7 @@ class OrganizationTableViewController: UITableViewController, DZNEmptyDataSetSou
     func imageAnimation(forEmptyDataSet scrollView: UIScrollView!) -> CAAnimation! {
         let animation = CABasicAnimation(keyPath: "transform")
         animation.fromValue = NSValue(caTransform3D: CATransform3DMakeRotation(0.0, 0.0, 0.0, 1.0))
-        animation.toValue = NSValue(caTransform3D: CATransform3DMakeRotation(CGFloat(M_PI_2), 0.0, 0.0, 1.0))
+        animation.toValue = NSValue(caTransform3D: CATransform3DMakeRotation(CGFloat(Double.pi / 2), 0.0, 0.0, 1.0))
         animation.duration = 0.5
         animation.isCumulative = true
         animation.repeatCount = MAXFLOAT

@@ -29,7 +29,7 @@
         if (cryptStatus == kCCSuccess) {
             NSData *data = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesEncrypted];
             
-            NSLog(@"data lenght:%ld",data.length);
+            NSLog(@"data lenght:%d",(int)data.length);
             ciphertext = [self hexStringFromData:data];
         }
         return ciphertext;

@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform:ios,'8.0'
 use_frameworks!
 
-target 'AntService' do
+target 'BaiRong' do
     pod 'Alamofire'
     pod 'SwiftyJSON'
     pod 'Toaster'
@@ -17,19 +17,7 @@ target 'AntService' do
     pod 'SKPhotoBrowser', :git => 'https://github.com/suzuki-0000/SKPhotoBrowser.git', :branch => 'swift3'
     pod 'FMDB'
     pod 'CVCalendar'
-    #pod 'ProtocolBuffers-Swift'
-    
-    #pod 'ShareSDK3'
-    #pod 'MOBFoundation'
-    #pod 'ShareSDK3/ShareSDKUI'
-    #pod 'ShareSDK3/ShareSDKPlatforms/QQ'
-    #pod 'ShareSDK3/ShareSDKPlatforms/SinaWeibo'
-    #pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
-    #pod 'ShareSDK3/ShareSDKExtension'
-    
-    #pod 'CocoaAsyncSocket'
-    
-    #pod 'KeychainAccess'
+    pod 'DatePickerDialog'
     
     pod 'Bugly'
 

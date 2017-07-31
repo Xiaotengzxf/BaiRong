@@ -202,114 +202,25 @@ class IndexCollectionViewController: UICollectionViewController , UICollectionVi
         collectionView.deselectItem(at: indexPath, animated: true)
         currentRow = indexPath.row
         if indexPath.row == 0 {
-            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "order") as? OrderTableViewController {
-                controller.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(controller, animated: true)
-            }
+            NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 1, userInfo: nil)
         }else if indexPath.row == 1 {
-            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "order") as? OrderTableViewController {
-                controller.hidesBottomBarWhenPushed = true
-                controller.bHandled = true
+            NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 2, userInfo: nil)
+        }else if indexPath.row == 2 {
+            NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 3, userInfo: nil)
+        }else if indexPath.row == 3 {
+            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "Reservation") as? ReservationTableViewController {
                 self.navigationController?.pushViewController(controller, animated: true)
             }
-        }else if indexPath.row == 3 {
-            page = TabPageViewController.create()
-            page.title = "组织结构"
-            guard let organization = self.storyboard?.instantiateViewController(withIdentifier: "org") as? OrganizationTableViewController else {
-                return
-            }
-            guard let user = self.storyboard?.instantiateViewController(withIdentifier: "userlist") as? UserListTableViewController else {
-                return
-            }
-            user.bOffset = true
-            var option = TabPageOption()
-            option.tabBackgroundColor = UIColor.white
-            option.isTranslucent = false
-            option.tabHeight = 44
-            option.tabWidth = SCREENWIDTH / 2
-            page.option = option
-            page.tabItems = [(organization, "部门信息"), (user, "用户列表")]
-            page.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(page, animated: true)
-        }else if indexPath.row == 2 {
-            self.performSegue(withIdentifier: "waitwork", sender: self)
         }else if indexPath.row == 4 {
-            self.performSegue(withIdentifier: "call", sender: self)
+            NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 4, userInfo: nil)
         }else if indexPath.row == 5 {
-            guard let customer = self.storyboard?.instantiateViewController(withIdentifier: "customer") as? CustomerViewController else {
-                return
+            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "Setting") {
+                self.navigationController?.pushViewController(controller, animated: true)
             }
-            customer.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(customer, animated: true)
-        }else if indexPath.row == 6 {
-            self.performSegue(withIdentifier: "quote", sender: self)
-        }else if indexPath.row == 7 {
-            self.performSegue(withIdentifier: "dialog", sender: self)
-        }else if indexPath.row == 8 {
-            // commerciallist
-            page = TabPageViewController.create()
-            page.title = "商机列表"
-            guard let confirming = self.storyboard?.instantiateViewController(withIdentifier: "commerciallist") as? ZXFCommercialListTableViewController else {
-                return
-            }
-            confirming.state = 2
-            guard let following = self.storyboard?.instantiateViewController(withIdentifier: "commerciallist") as? ZXFCommercialListTableViewController else {
-                return
-            }
-            following.state = 1
-            guard let finished = self.storyboard?.instantiateViewController(withIdentifier: "commerciallist") as? ZXFCommercialListTableViewController else {
-                return
-            }
-            finished.state = 3
-            guard let destoried = self.storyboard?.instantiateViewController(withIdentifier: "commerciallist") as? ZXFCommercialListTableViewController else {
-                return
-            }
-            destoried.state = 4
-            var option = TabPageOption()
-            option.tabBackgroundColor = UIColor.white
-            option.isTranslucent = false
-            option.tabHeight = 44
-            option.tabWidth = SCREENWIDTH / 4
-            page.option = option
-            page.tabItems = [(confirming, "确认中"), (following, "跟进中"), (finished, "已完成"), (destoried, "已销毁") ]
-            page.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(page, animated: true)
-            page.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(IndexCollectionViewController.handleBarButtonEvent))
-        }else if indexPath.row == 9 {
-            self.performSegue(withIdentifier: "contract", sender: self)
-        }else if indexPath.row == 10 {
-            self.performSegue(withIdentifier: "product", sender: self)
-        }else if indexPath.row == 11 {
-            guard let mine = self.storyboard?.instantiateViewController(withIdentifier: "mine") as? MineTableViewController else {
-                return
-            }
-            mine.hidesBottomBarWhenPushed = true
-            mine.navigationItem.rightBarButtonItem = nil
-            self.navigationController?.pushViewController(mine, animated: true)
-        }else if indexPath.row == 12 {
-            guard let setting = self.storyboard?.instantiateViewController(withIdentifier: "setting") as? SettingTableViewController else {
-                return
-            }
-            setting.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(setting, animated: true)
         }
     }
     
     func handleBarButtonEvent() {
-        if currentRow == 8 {
-            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "commercialsearch") as? CommercialSearchViewController {
-                self.navigationController?.pushViewController(controller, animated: true)
-            }
-        }else{
-            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "search") as? SearchViewController {
-                controller.modalTransitionStyle = .crossDissolve
-                controller.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-                controller.modalPresentationStyle = .overFullScreen
-                controller.searchName = "userlist"
-                self.present(controller, animated: true, completion: {
-                    
-                })
-            }
-        }
+        
     }
 }
