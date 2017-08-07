@@ -139,6 +139,12 @@ class AddFollowViewController: UIViewController, RadioViewDelegate {
         }
         if self.arrConfig.count > 0, let custbatch = arrConfig[0]["custbatch"].string, custbatch.characters.count > 0 {
             params["custbatch"] = custbatch
+        }else{
+            if let custbatch = json["custbatch"].string, custbatch.characters.count > 0 {
+                params["custbatch"] = custbatch
+            }else if let custbatch = json["cust_batch"].string, custbatch.characters.count > 0{
+                params["custbatch"] = custbatch
+            }
         }
         NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appCustfollow, params: params){
             [weak self] (json , error) in
