@@ -26,6 +26,7 @@ class PortrayalTableViewController: UITableViewController ,DZNEmptyDataSetDelega
     var email : String?
     var batch : String?
     var projectType : String?
+    var flag = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,7 @@ class PortrayalTableViewController: UITableViewController ,DZNEmptyDataSetDelega
         NotificationCenter.default.addObserver(self, selector: #selector(PortrayalTableViewController.handleNotification(notification:)), name: Notification.Name("PortrayalTableViewController"), object: nil)
         
         loadProjectData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +53,9 @@ class PortrayalTableViewController: UITableViewController ,DZNEmptyDataSetDelega
             self.loadData()
         }else{
             self.tableView.mj_header.beginRefreshing()
+        }
+        if flag > 0 {
+            self.navigationItem.rightBarButtonItem = nil
         }
     }
 

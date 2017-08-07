@@ -109,7 +109,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate {
                     self?.view.window?.rootViewController = tabbar
                     
                 }else{
-                    if let message = object["msg"].string , message.characters.count > 0 {
+                    if let message = object["info"].string , message.characters.count > 0 {
                         Toast(text: message).show()
                     }
                 }

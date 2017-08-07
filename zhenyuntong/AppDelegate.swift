@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         application.setStatusBarStyle(.lightContent, animated: false)
         IQKeyboardManager.sharedManager().enable = true
         
+        checkIsLogin()
+        
         return true
     }
 

@@ -38,7 +38,11 @@ class PortrayalDetailTableViewController: UITableViewController {
 
     func loadData() {
         hud = showHUD(text: "加载中...")
-        NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appFigureList, params: ["projectid" : json["projectid"].stringValue , "id" : json["id"].stringValue, "type" : json["type"].stringValue, "mobile" : json["phmobile"].stringValue] ){
+        var projectId = json["projectid"].stringValue
+        if projectId.characters.count == 0 {
+            projectId = json["project_id"].stringValue
+        }
+        NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appFigureList, params: ["projectid" : projectId , "id" : json["id"].stringValue, "type" : json["type"].stringValue, "mobile" : json["phmobile"].stringValue] ){
             [weak self] (json , error) in
             self?.count += 1
             if let object = json {
@@ -289,7 +293,19 @@ class PortrayalDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PDTableViewCell
+        
+        if arrTableData[indexPath.row][0] == "手机号码" {
+            cell.lcTrailing.constant = SCREENWIDTH - 210
+            if let imageView = cell.contentView.viewWithTag(13) as? UIImageView {
+                imageView.isHidden = false
+            }
+        }else{
+            cell.lcTrailing.constant = 16
+            if let imageView = cell.contentView.viewWithTag(13) as? UIImageView {
+                imageView.isHidden = true
+            }
+        }
 
         if let label = cell.contentView.viewWithTag(1) as? UILabel {
             label.text = arrTableData[indexPath.row][0]
@@ -304,6 +320,37 @@ class PortrayalDetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if arrTableData[indexPath.row][0] == "手机号码" {
+            let hud = showHUD(text: "提交中...")
+            NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appClickCall, params: ["mobile" : json["phmobile"].stringValue]){
+                [weak self] (json , error) in
+                hud.hide(animated: true)
+                if let object = json {
+                    if let status = object["status"].int, status == 1 {
+                        let alertController = UIAlertController(title: "呼叫成功，请等待回拨电话并接听", message: nil, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "确定", style: .cancel, handler: {[weak self] (action) in
+                            if let controller = self?.storyboard?.instantiateViewController(withIdentifier: "AddFollow") as? AddFollowViewController {
+                                controller.json = self!.json
+                                self?.navigationController?.pushViewController(controller, animated: true)
+                            }
+                        }))
+                        self?.present(alertController, animated: true, completion: {
+                            
+                        })
+                    }else{
+                        if let info = object["info"].string {
+                            Toast(text: info).show()
+                        }
+                    }
+                }else{
+                    Toast(text: "网络异常，请稍后重试").show()
+                }
+            }
+        }
     }
 
 }

@@ -14,6 +14,7 @@ class RadioView: UIView, UITableViewDelegate, UITableViewDataSource {
     var tableView : UITableView?
     var delegate : RadioViewDelegate?
     var type = 0
+    var bTouch = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,13 +36,22 @@ class RadioView: UIView, UITableViewDelegate, UITableViewDataSource {
         self.addSubview(tableView!)
         
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(40)-[tableView]-(40)-|", options: .directionLeadingToTrailing, metrics: nil, views: ["tableView" : tableView!]))
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[tableView(height)]", options: .directionLeadingToTrailing, metrics: ["height" : tableData.count * 44], views: ["tableView" : tableView!]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[tableView(height)]", options: .directionLeadingToTrailing, metrics: ["height" : min(300, tableData.count * 44)], views: ["tableView" : tableView!]))
         self.addConstraint(NSLayoutConstraint(item: self.tableView!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
         
     }
     
-    deinit {
-        
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if bTouch {
+            return
+        }
+        for touch in touches {
+            if touch.location(in: tableView!).x < 0 || touch.location(in: tableView!).y < 0{
+                continue
+            }else{
+                delegate?.removeRadioView()
+            }
+        }
     }
     
     // mark: - Table view datasource

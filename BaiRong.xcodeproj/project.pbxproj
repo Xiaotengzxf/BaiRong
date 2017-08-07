@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1846CB057D78BD2BDC505B99 /* Pods_BaiRong.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C73230784FC00F08A8B418 /* Pods_BaiRong.framework */; };
-		3BCCBACDF483366897470E55 /* Pods_AntService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F58288909F8287761F2216 /* Pods_AntService.framework */; };
 		8913666C1E0510D1006C0AFA /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913666B1E0510D1006C0AFA /* EmptyView.swift */; };
 		8913666E1E0510DD006C0AFA /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8913666D1E0510DD006C0AFA /* EmptyView.xib */; };
 		891366761E058619006C0AFA /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891366751E058618006C0AFA /* CommentView.swift */; };
@@ -58,7 +57,6 @@
 		896D8F241F27998A002EE568 /* StatisticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D8F231F27998A002EE568 /* StatisticsTableViewController.swift */; };
 		896D8F261F28E02F002EE568 /* PortrayalDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D8F251F28E02F002EE568 /* PortrayalDetailTableViewController.swift */; };
 		896D8F291F2A2E52002EE568 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D8F281F2A2E52002EE568 /* SettingViewController.swift */; };
-		896D8F2B1F2A3B57002EE568 /* ReservationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D8F2A1F2A3B57002EE568 /* ReservationTableViewController.swift */; };
 		896D8F2E1F2A41FF002EE568 /* CustomerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D8F2D1F2A41FF002EE568 /* CustomerTableViewController.swift */; };
 		896D8F311F2A44AA002EE568 /* NewTaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D8F301F2A44AA002EE568 /* NewTaskTableViewController.swift */; };
 		896D8F331F2B8BE1002EE568 /* CustomerDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D8F321F2B8BE1002EE568 /* CustomerDetailTableViewController.swift */; };
@@ -74,14 +72,20 @@
 		8978CAEB1E93D40900BBC926 /* WaitWorkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8978CAEA1E93D40800BBC926 /* WaitWorkTableViewCell.swift */; };
 		89847E251E9FD68D00B02D01 /* ic_home_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 89847E241E9FD68D00B02D01 /* ic_home_banner.jpg */; };
 		898916D61E7D574C00BE6848 /* c_boy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 898916D51E7D574C00BE6848 /* c_boy.jpg */; };
-		898916DF1E7E460100BE6848 /* OrganizationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898916DE1E7E460100BE6848 /* OrganizationTableViewController.swift */; };
 		898916E11E7E48F500BE6848 /* OrganizationTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898916E01E7E48F500BE6848 /* OrganizationTableHeaderView.swift */; };
 		898916E31E7E490E00BE6848 /* OrganizationTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898916E21E7E490E00BE6848 /* OrganizationTableHeaderView.xib */; };
 		89965D791EA26A3A006560BA /* CommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89965D781EA26A3A006560BA /* CommitView.swift */; };
 		89965D7B1EA26A4B006560BA /* CommitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89965D7A1EA26A4B006560BA /* CommitView.xib */; };
+		89AEC7DB1F30DF06004C8544 /* FollowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AEC7DA1F30DF06004C8544 /* FollowTableViewController.swift */; };
+		89AEC7DD1F30E0EF004C8544 /* CustomDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AEC7DC1F30E0EF004C8544 /* CustomDetailTableViewCell.swift */; };
 		89EA35961DF903F600247EBB /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA35951DF903F600247EBB /* Constant.swift */; };
-		89EA35981DF911CC00247EBB /* InfoLookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA35971DF911CC00247EBB /* InfoLookTableViewCell.swift */; };
 		89EA359A1DF93D2000247EBB /* CollectionViewHorizontalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA35991DF93D2000247EBB /* CollectionViewHorizontalLayout.swift */; };
+		9ADCDA141F3063BB001EF36D /* ReservationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADCDA131F3063BB001EF36D /* ReservationTableViewController.swift */; };
+		9ADCDA161F306CE4001EF36D /* NewTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADCDA151F306CE4001EF36D /* NewTaskTableViewCell.swift */; };
+		9ADCDA181F307379001EF36D /* PDTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADCDA171F307379001EF36D /* PDTableViewCell.swift */; };
+		9ADCDA1A1F307C1A001EF36D /* AddFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADCDA191F307C1A001EF36D /* AddFollowViewController.swift */; };
+		9ADCDA1C1F307F6B001EF36D /* AddAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADCDA1B1F307F6B001EF36D /* AddAppointmentViewController.swift */; };
+		9ADCDA1F1F30838F001EF36D /* PTXDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADCDA1E1F30838F001EF36D /* PTXDatePickerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,7 +172,6 @@
 		896D8F231F27998A002EE568 /* StatisticsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewController.swift; sourceTree = "<group>"; };
 		896D8F251F28E02F002EE568 /* PortrayalDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortrayalDetailTableViewController.swift; sourceTree = "<group>"; };
 		896D8F281F2A2E52002EE568 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		896D8F2A1F2A3B57002EE568 /* ReservationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationTableViewController.swift; sourceTree = "<group>"; };
 		896D8F2D1F2A41FF002EE568 /* CustomerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTableViewController.swift; sourceTree = "<group>"; };
 		896D8F301F2A44AA002EE568 /* NewTaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskTableViewController.swift; sourceTree = "<group>"; };
 		896D8F321F2B8BE1002EE568 /* CustomerDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -184,15 +187,22 @@
 		8978CAEA1E93D40800BBC926 /* WaitWorkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitWorkTableViewCell.swift; sourceTree = "<group>"; };
 		89847E241E9FD68D00B02D01 /* ic_home_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ic_home_banner.jpg; sourceTree = "<group>"; };
 		898916D51E7D574C00BE6848 /* c_boy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = c_boy.jpg; sourceTree = "<group>"; };
-		898916DE1E7E460100BE6848 /* OrganizationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationTableViewController.swift; sourceTree = "<group>"; };
 		898916E01E7E48F500BE6848 /* OrganizationTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationTableHeaderView.swift; sourceTree = "<group>"; };
 		898916E21E7E490E00BE6848 /* OrganizationTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrganizationTableHeaderView.xib; sourceTree = "<group>"; };
 		89965D781EA26A3A006560BA /* CommitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitView.swift; sourceTree = "<group>"; };
 		89965D7A1EA26A4B006560BA /* CommitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommitView.xib; sourceTree = "<group>"; };
+		89AEC7DA1F30DF06004C8544 /* FollowTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowTableViewController.swift; sourceTree = "<group>"; };
+		89AEC7DC1F30E0EF004C8544 /* CustomDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDetailTableViewCell.swift; sourceTree = "<group>"; };
 		89EA35951DF903F600247EBB /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		89EA35971DF911CC00247EBB /* InfoLookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoLookTableViewCell.swift; sourceTree = "<group>"; };
 		89EA35991DF93D2000247EBB /* CollectionViewHorizontalLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewHorizontalLayout.swift; sourceTree = "<group>"; };
 		93F58288909F8287761F2216 /* Pods_AntService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AntService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9ADCDA131F3063BB001EF36D /* ReservationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationTableViewController.swift; sourceTree = "<group>"; };
+		9ADCDA151F306CE4001EF36D /* NewTaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskTableViewCell.swift; sourceTree = "<group>"; };
+		9ADCDA171F307379001EF36D /* PDTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDTableViewCell.swift; sourceTree = "<group>"; };
+		9ADCDA191F307C1A001EF36D /* AddFollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFollowViewController.swift; sourceTree = "<group>"; };
+		9ADCDA1B1F307F6B001EF36D /* AddAppointmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAppointmentViewController.swift; sourceTree = "<group>"; };
+		9ADCDA1D1F30838F001EF36D /* PTXDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTXDatePickerView.h; sourceTree = "<group>"; };
+		9ADCDA1E1F30838F001EF36D /* PTXDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTXDatePickerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,7 +211,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8969132B1E8C07F300251D8F /* AVFoundation.framework in Frameworks */,
-				3BCCBACDF483366897470E55 /* Pods_AntService.framework in Frameworks */,
 				1846CB057D78BD2BDC505B99 /* Pods_BaiRong.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,6 +386,7 @@
 			children = (
 				896D8F301F2A44AA002EE568 /* NewTaskTableViewController.swift */,
 				896D8F341F2CD55E002EE568 /* NewTaskSearchViewController.swift */,
+				89AEC7DA1F30DF06004C8544 /* FollowTableViewController.swift */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -384,6 +394,8 @@
 		899553C21DF5A05C00C7421C /* Kit */ = {
 			isa = PBXGroup;
 			children = (
+				9ADCDA1D1F30838F001EF36D /* PTXDatePickerView.h */,
+				9ADCDA1E1F30838F001EF36D /* PTXDatePickerView.m */,
 				893101041F0B706F00B65426 /* radioButton.swift */,
 				8946F8611DF83E7C00F3D849 /* NetworkManager.swift */,
 				89EA35951DF903F600247EBB /* Constant.swift */,
@@ -422,10 +434,11 @@
 				896D8F3C1F2E3AD4002EE568 /* PortrayalSearchViewController.swift */,
 				896D8F231F27998A002EE568 /* StatisticsTableViewController.swift */,
 				896D8F3A1F2E3ABD002EE568 /* StatisticsSearchViewController.swift */,
-				896D8F2A1F2A3B57002EE568 /* ReservationTableViewController.swift */,
 				895385BB1E0EA864009ECD2E /* WebViewController.swift */,
 				8978C36E1E15151800AFA20D /* PortrayalViewController.swift */,
-				898916DE1E7E460100BE6848 /* OrganizationTableViewController.swift */,
+				9ADCDA131F3063BB001EF36D /* ReservationTableViewController.swift */,
+				9ADCDA191F307C1A001EF36D /* AddFollowViewController.swift */,
+				9ADCDA1B1F307F6B001EF36D /* AddAppointmentViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -444,7 +457,6 @@
 		899553C51DF5A05C00C7421C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				89EA35971DF911CC00247EBB /* InfoLookTableViewCell.swift */,
 				894721B91DFC78BB002E0A60 /* PlaceholderTextView.swift */,
 				89EA35991DF93D2000247EBB /* CollectionViewHorizontalLayout.swift */,
 				894C7A491E02E72B001B55E9 /* InputView.swift */,
@@ -470,6 +482,9 @@
 				8931010C1F0BDDEF00B65426 /* ProductView.xib */,
 				896D8F381F2DD024002EE568 /* RadioView.swift */,
 				896D8F3E1F2F8395002EE568 /* PTableViewCell.swift */,
+				9ADCDA151F306CE4001EF36D /* NewTaskTableViewCell.swift */,
+				9ADCDA171F307379001EF36D /* PDTableViewCell.swift */,
+				89AEC7DC1F30E0EF004C8544 /* CustomDetailTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -562,7 +577,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = zhenyuntong;
 				TargetAttributes = {
 					8915E6521DF26EF700B083B4 = {
@@ -703,30 +718,35 @@
 				895385BC1E0EA864009ECD2E /* WebViewController.swift in Sources */,
 				894C7A511E0438F1001B55E9 /* UpLoadFileView.swift in Sources */,
 				896D8F241F27998A002EE568 /* StatisticsTableViewController.swift in Sources */,
-				898916DF1E7E460100BE6848 /* OrganizationTableViewController.swift in Sources */,
 				896913291E8C073A00251D8F /* CallTableViewCell.swift in Sources */,
 				897053231E799B2D00749D39 /* PortrayalTableViewController.swift in Sources */,
 				896D8F3D1F2E3AD4002EE568 /* PortrayalSearchViewController.swift in Sources */,
 				896D8F3F1F2F8395002EE568 /* PTableViewCell.swift in Sources */,
 				896D8F391F2DD024002EE568 /* RadioView.swift in Sources */,
 				8978C36F1E15151800AFA20D /* PortrayalViewController.swift in Sources */,
+				9ADCDA1A1F307C1A001EF36D /* AddFollowViewController.swift in Sources */,
 				893101091F0BA57300B65426 /* ProductTableViewCell.swift in Sources */,
 				8951F9F31E11466A0004D391 /* SQLManager.swift in Sources */,
 				896D8F371F2DC7CB002EE568 /* CustomerSearchViewController.swift in Sources */,
 				893100F51F069A2100B65426 /* BaseRequest.swift in Sources */,
 				895385BF1E0EAC94009ECD2E /* UINavigationItem+CustomBackButton.m in Sources */,
+				89AEC7DB1F30DF06004C8544 /* FollowTableViewController.swift in Sources */,
 				89750DAC1E78410300C46DBE /* IndexCollectionViewController.swift in Sources */,
 				895385BA1E0E845D009ECD2E /* CommonOtherTableViewCell.swift in Sources */,
 				8978CAEB1E93D40900BBC926 /* WaitWorkTableViewCell.swift in Sources */,
+				89AEC7DD1F30E0EF004C8544 /* CustomDetailTableViewCell.swift in Sources */,
 				896D8F221F2648CD002EE568 /* TaskCollectionViewController.swift in Sources */,
 				896D8F311F2A44AA002EE568 /* NewTaskTableViewController.swift in Sources */,
 				893100FD1F092B5100B65426 /* CommercialListInteractor.swift in Sources */,
 				8931010B1F0BDDDB00B65426 /* ProductView.swift in Sources */,
 				89239DFA1DFEBF3F009F902B /* mTabBarController.swift in Sources */,
+				9ADCDA1F1F30838F001EF36D /* PTXDatePickerView.m in Sources */,
 				893100D41F000BA300B65426 /* BasePresenter.swift in Sources */,
 				894721C61DFD3B08002E0A60 /* pinyin.c in Sources */,
+				9ADCDA141F3063BB001EF36D /* ReservationTableViewController.swift in Sources */,
 				8921C22C1E0971F3007F1760 /* MCollectionReusableView.swift in Sources */,
 				896D8F291F2A2E52002EE568 /* SettingViewController.swift in Sources */,
+				9ADCDA161F306CE4001EF36D /* NewTaskTableViewCell.swift in Sources */,
 				8946F8791DF9BA3A00F3D849 /* Invalidate.swift in Sources */,
 				896D8F351F2CD55E002EE568 /* NewTaskSearchViewController.swift in Sources */,
 				89EA359A1DF93D2000247EBB /* CollectionViewHorizontalLayout.swift in Sources */,
@@ -734,8 +754,6 @@
 				896D8F261F28E02F002EE568 /* PortrayalDetailTableViewController.swift in Sources */,
 				8946F8621DF83E7C00F3D849 /* NetworkManager.swift in Sources */,
 				896D8F331F2B8BE1002EE568 /* CustomerDetailTableViewController.swift in Sources */,
-				89EA35981DF911CC00247EBB /* InfoLookTableViewCell.swift in Sources */,
-				896D8F2B1F2A3B57002EE568 /* ReservationTableViewController.swift in Sources */,
 				891781451DF70FA900471233 /* LoginViewController.swift in Sources */,
 				8921C2271E096F3F007F1760 /* DateManager.swift in Sources */,
 				893100F71F069B3A00B65426 /* OppoListRequest.swift in Sources */,
@@ -744,10 +762,12 @@
 				89EA35961DF903F600247EBB /* Constant.swift in Sources */,
 				894721B61DFBDB78002E0A60 /* DESHelper.m in Sources */,
 				893100D71F000F6F00B65426 /* CommercialListProtocol.swift in Sources */,
+				9ADCDA1C1F307F6B001EF36D /* AddAppointmentViewController.swift in Sources */,
 				8915E6571DF26EF800B083B4 /* AppDelegate.swift in Sources */,
 				894C7A4F1E042CCC001B55E9 /* RadioButton.m in Sources */,
 				8951F9F41E11466A0004D391 /* SQLSyn.swift in Sources */,
 				896D8F3B1F2E3ABD002EE568 /* StatisticsSearchViewController.swift in Sources */,
+				9ADCDA181F307379001EF36D /* PDTableViewCell.swift in Sources */,
 				89162AF91E0ABC9800181BC5 /* IQDropDownTextField.m in Sources */,
 				893100DB1F00100A00B65426 /* CommercialListPresenter.swift in Sources */,
 				898916E11E7E48F500BE6848 /* OrganizationTableHeaderView.swift in Sources */,
@@ -820,6 +840,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -869,6 +890,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -900,6 +922,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ATC7LUECLP;
 				ENABLE_BITCODE = NO;
@@ -907,7 +930,6 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/MOBFoundation\"",
-					"\"${PODS_ROOT}/Headers/Public/ShareSDK3\"",
 				);
 				INFOPLIST_FILE = zhenyuntong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -934,6 +956,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ATC7LUECLP;
 				ENABLE_BITCODE = NO;
@@ -941,7 +964,6 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/MOBFoundation\"",
-					"\"${PODS_ROOT}/Headers/Public/ShareSDK3\"",
 				);
 				INFOPLIST_FILE = zhenyuntong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

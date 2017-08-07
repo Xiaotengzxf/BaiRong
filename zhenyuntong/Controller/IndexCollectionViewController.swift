@@ -77,25 +77,6 @@ class IndexCollectionViewController: UICollectionViewController , UICollectionVi
         }
     }
     
-    @IBAction func updateModel(_ sender: Any) {
-        let model = self.navigationItem.rightBarButtonItem?.title == "外出模式" ? "办公模式" : "外出模式"
-        let hud = showHUD(text: "设置\(model)")
-        NetworkManager.installshared.request(type: .post, url: model == "办公模式" ? NetworkManager.installshared.appDelCFPhone : NetworkManager.installshared.appCFPhone, params: nil){
-            [weak self] (json , error) in
-            hud.hide(animated: true)
-            if let object = json {
-                if let result = object["result"].int {
-                    if result == 1011 {
-                        Toast(text: "设置\(model)失败：" + object["msg"].stringValue).show()
-                    }else if result == 1000 {
-                        Toast(text: "设置\(model)成功").show()
-                        self?.modelItem.title = model
-                    }
-                    
-                }
-            }
-        }
-    }
     // 通知
     func handleNotification(notification : Notification) {
         if let tag = notification.object as? Int {
@@ -209,6 +190,7 @@ class IndexCollectionViewController: UICollectionViewController , UICollectionVi
             NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 3, userInfo: nil)
         }else if indexPath.row == 3 {
             if let controller = self.storyboard?.instantiateViewController(withIdentifier: "Reservation") as? ReservationTableViewController {
+                controller.bCustomer = true
                 self.navigationController?.pushViewController(controller, animated: true)
             }
         }else if indexPath.row == 4 {

@@ -26,9 +26,6 @@ class CustomerSearchViewController: UIViewController, RadioViewDelegate {
         super.viewDidLoad()
         loadData()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(sender:)))
-        self.view.addGestureRecognizer(tap)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,11 +63,15 @@ class CustomerSearchViewController: UIViewController, RadioViewDelegate {
     
     @IBAction func selectCallResult(_ sender: Any) {
         if radioView == nil {
+            if arrCall.count == 0 {
+                return
+            }
             radioView = RadioView(frame: .zero)
             radioView?.delegate = self
             radioView?.tableData = arrCall.map{$0["name"].stringValue}
             radioView?.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(radioView!)
+            radioView?.bTouch = true
 
             self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[radioView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["radioView" : radioView!]))
             self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[radioView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["radioView" : radioView!]))
@@ -82,12 +83,16 @@ class CustomerSearchViewController: UIViewController, RadioViewDelegate {
 
     @IBAction func selectHandleResult(_ sender: Any) {
         if radioView == nil {
+            if arrHandle.count == 0 {
+                return
+            }
             radioView = RadioView(frame: .zero)
             radioView?.delegate = self
             radioView?.type = 1
             radioView?.tableData = arrHandle.map{$0["name"].stringValue}
             radioView?.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(radioView!)
+            radioView?.bTouch = true
            
             self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[radioView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["radioView" : radioView!]))
             self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[radioView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["radioView" : radioView!]))
@@ -120,10 +125,18 @@ class CustomerSearchViewController: UIViewController, RadioViewDelegate {
         }
     }
     
-    func handleTap(sender : UITapGestureRecognizer) {
-       
-        self.dismiss(animated: true) {
-            
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.next?.touchesBegan(touches, with: event)
+        if radioView != nil {
+            return
+        }
+        for touch in touches {
+            print(touch.location(in: self.view))
+            if touch.location(in: self.view).y < 64 || touch.location(in: self.view).y > 257 + 64 {
+                self.dismiss(animated: true) {
+                    
+                }
+            }
         }
     }
 

@@ -10,11 +10,13 @@ import UIKit
 import SwiftyJSON
 import Toaster
 
-class CustomerDetailTableViewController: UITableViewController {
+class CustomerDetailTableViewController: UITableViewController, CustomDetailTableViewCellDelegate {
     
     let arrTitle = ["姓名：", "数据批次：", "归属项目：", "手机号码：", "归属人：", "备注：", "添加时间："]
     var json : JSON! = nil
     var rows : [String : Any] = [:]
+    var bCustomer = false
+    var level = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +30,18 @@ class CustomerDetailTableViewController: UITableViewController {
     
     func loadData() {
         let hud = showHUD(text: "加载中...")
-        //var mobile =
-        NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appCustDetail, params: ["mobile" : json["phmobile"].stringValue , "id" : json["id"].stringValue] ){
+        var params : [String : Any] = [:]
+        if bCustomer {
+            params["mobile"] = json["phmobile"].stringValue
+        }else{
+            params["id"] = json["id"].stringValue
+        }
+        NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appCustDetail, params: params ){
             [weak self] (json , error) in
             hud.hide(animated: true)
             if let object = json {
                 if let total = object["total"].int, total > 0 {
+                    self!.level = object["level"].intValue
                     if let arr = object["rows"].dictionaryObject {
                         self!.rows = arr
                     }
@@ -48,12 +56,29 @@ class CustomerDetailTableViewController: UITableViewController {
             }
         }
     }
+    
     @IBAction func showStar(_ sender: Any) {
-        Toast(text: "正在开发中，敬请期待...").show()
+        if level == 0 {
+            self.search(tag: 0)
+        }else{
+            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "PortrayalList") as? PortrayalTableViewController {
+                controller.hidesBottomBarWhenPushed = true
+                controller.mobile = json["phmobile"].stringValue
+                controller.flag = 1
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+        }
+        
     }
 
     @IBAction func showHistoryRecord(_ sender: Any) {
-        Toast(text: "正在开发中，敬请期待...").show()
+        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "Follow") as? FollowTableViewController {
+            if !bCustomer {
+                controller.strId = json["id"].stringValue
+            }
+            controller.mobile = json["phmobile"].stringValue
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
     // MARK: - Table view data source
 
@@ -62,7 +87,8 @@ class CustomerDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! CustomDetailTableViewCell
+        cell.delegate = self
 
         if let label = cell.contentView.viewWithTag(1) as? UILabel {
             label.text = arrTitle[indexPath.row]
@@ -74,7 +100,7 @@ class CustomerDetailTableViewController: UITableViewController {
             case 1:
                 label.text = rows["cust_batch"] as? String ?? ""
             case 2:
-                label.text = rows["project_id"] as? String ?? ""
+                label.text = rows["proname"] as? String ?? ""
             case 3:
                 label.text = rows["mobile"] as? String ?? ""
             case 4:
@@ -118,5 +144,69 @@ class CustomerDetailTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - UITable view cell delegate
+    func call(tag: Int) {
+        let hud = showHUD(text: "提交中...")
+        NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appClickCall, params: ["mobile" : json["phmobile"].stringValue]){
+            [weak self] (json , error) in
+            hud.hide(animated: true)
+            if let object = json {
+                if let status = object["status"].int, status == 1 {
+                    let alertController = UIAlertController(title: "呼叫成功，请等待回拨电话并接听", message: nil, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "确定", style: .cancel, handler: {[weak self] (action) in
+                        if let controller = self?.storyboard?.instantiateViewController(withIdentifier: "AddFollow") as? AddFollowViewController {
+                            controller.json = self!.json
+                            self?.navigationController?.pushViewController(controller, animated: true)
+                        }
+                    }))
+                    self?.present(alertController, animated: true, completion: {
+                        
+                    })
+                }else{
+                    if let info = object["info"].string {
+                        Toast(text: info).show()
+                    }
+                }
+            }else{
+                Toast(text: "网络异常，请稍后重试").show()
+            }
+        }
+    }
+    
+    func search(tag: Int) {
+        
+        guard let name = rows["customer"] as? String , name.characters.count > 0 else {
+            Toast(text: "客户姓名为空，无法查询").show()
+            return
+        }
+        guard let mobile = rows["phmobile"] as? String , mobile.characters.count > 0 else {
+            Toast(text: "手机号码为空，无法查询").show()
+            return
+        }
+        let hud = showHUD(text: "加载中...")
+        NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appFigure, params: ["mobile" : mobile, "name": name]){
+            [weak self] (json , error) in
+            hud.hide(animated: true)
+            if let object = json {
+                if let status = object["status"].int, status == 1 {
+                    if let arr = object["info"].array, arr.count > 0 {
+                        if let controller = self?.storyboard?.instantiateViewController(withIdentifier: "PortrayalDetail") as? PortrayalDetailTableViewController {
+                            controller.json = arr[0]
+                            self?.navigationController?.pushViewController(controller, animated: true)
+                        }
+                    }else{
+                        Toast(text: "无数据").show()
+                    }
+                }else{
+                    if let info = object["info"].string {
+                        Toast(text: info).show()
+                    }
+                }
+            }else{
+                Toast(text: "网络异常，请稍后重试").show()
+            }
+        }
+    }
 
 }

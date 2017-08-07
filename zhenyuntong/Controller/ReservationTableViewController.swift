@@ -17,8 +17,6 @@ class ReservationTableViewController: UITableViewController ,DZNEmptyDataSetDele
     var page = 0
     var data : [JSON] = []
     var nShowEmpty = 2 // 1 无数据 2 加载中 3 无网络
-    var search = ""
-    var bSearch = false
     var bCustomer = false
     var custId = ""
     
@@ -37,9 +35,6 @@ class ReservationTableViewController: UITableViewController ,DZNEmptyDataSetDele
         tableView.mj_footer.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(notification:)), name: Notification.Name("ReservationTableViewController"), object: nil)
         
-        if bSearch {
-            self.navigationItem.rightBarButtonItem = nil
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -195,6 +190,7 @@ class ReservationTableViewController: UITableViewController ,DZNEmptyDataSetDele
         tableView.deselectRow(at: indexPath, animated: true)
         if let controller = self.storyboard?.instantiateViewController(withIdentifier: "CustomerDetail") as? CustomerDetailTableViewController {
             controller.json = data[indexPath.row]
+            controller.bCustomer = true
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }

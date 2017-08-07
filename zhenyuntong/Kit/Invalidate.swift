@@ -52,4 +52,11 @@ class Invalidate {
         let emailTest = NSPredicate(format: "SELF MATCHES %@", regex)
         return emailTest.evaluate(with: value)
     }
+    
+    static func validateIDCard(idCard: String) -> Bool {
+        let idCardRegex = "^(\\d{14}|\\d{17})(\\d|[xX])$"
+        let predicate : NSPredicate = NSPredicate(format: "SELF MATCHES %@", idCardRegex)
+        return predicate.evaluate(with: idCard)
+    }
+    
 }

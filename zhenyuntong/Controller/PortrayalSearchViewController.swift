@@ -44,12 +44,17 @@ class PortrayalSearchViewController: UIViewController, UITextFieldDelegate, Radi
     }
     
     @IBAction func selectProjectType(_ sender: Any) {
+        resignResponder()
         if radioView == nil {
+            if arrProject.count == 0 {
+                return
+            }
             radioView = RadioView(frame: .zero)
             radioView?.delegate = self
             radioView?.tableData = arrProject.map{$0["typename"].stringValue}
             radioView?.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(radioView!)
+            radioView?.bTouch = true
             
             self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[radioView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["radioView" : radioView!]))
             self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[radioView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["radioView" : radioView!]))
@@ -61,6 +66,7 @@ class PortrayalSearchViewController: UIViewController, UITextFieldDelegate, Radi
     
     @IBAction func doSearch(_ sender: Any) {
         resignResponder()
+        
         delegate?.callback(name: tfName.text?.trimmingCharacters(in: .whitespacesAndNewlines), mobile: tfMobile.text?.trimmingCharacters(in: .whitespacesAndNewlines), idCard: tfIDCard.text?.trimmingCharacters(in: .whitespacesAndNewlines), email: tfEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines), batch: tfBland.text?.trimmingCharacters(in: .whitespacesAndNewlines), projectType: projectType)
         self.dismiss(animated: true) {
             

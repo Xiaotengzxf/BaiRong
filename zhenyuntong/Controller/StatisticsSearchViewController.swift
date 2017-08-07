@@ -47,6 +47,18 @@ class StatisticsSearchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.next?.touchesBegan(touches, with: event)
+        for touch in touches {
+            print(touch.location(in: self.view))
+            if touch.location(in: self.view).y < 64 || touch.location(in: self.view).y > 257 + 64 {
+                self.dismiss(animated: true) {
+                    
+                }
+            }
+        }
+    }
+    
     @IBAction func selectStartTime(_ sender: Any) {
         DatePickerDialog().show(title: "选择时间", doneButtonTitle: "确定", cancelButtonTitle: "取消", datePickerMode: .date) {[weak self]
             (date) -> Void in

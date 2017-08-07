@@ -14,10 +14,14 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var mSwitch: UISwitch!
     @IBOutlet weak var lblMobile: UILabel!
     @IBOutlet weak var lblVersion: UILabel!
+    var type = ""
+    var mobile = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let mine = UserDefaults.standard.object(forKey: "mine") as? [String : Any] {
             lblMobile.text = mine["phone"] as? String ?? ""
+            mobile = mine["phone"] as? String ?? ""
         }
         lblVersion.text = "当前版本号：\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "")"
         
@@ -30,15 +34,17 @@ class SettingViewController: UIViewController {
     }
     
     @IBAction func setWorkModel(_ sender: Any) {
-        let hud = showHUD(text: "加载中...")
-        NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appSetOutIn, params: nil ){
-            [weak self] (json , error) in
+        if type.characters.count == 0 {
+            Toast(text : "网络不稳定，请重新进入页面").show()
+            return
+        }
+        let hud = showHUD(text: "设置中...")
+        NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appSetOutIn, params: ["type" : type == "out" ? "in" : "out", "mobile" : mobile] ){
+             (json , error) in
             hud.hide(animated: true)
             if let object = json {
-                if let status = object["status"].int, status > 0 {
-                    self?.mSwitch.isOn = true
-                }else{
-                    self?.mSwitch.isOn = false
+                if let info = object["info"].string {
+                    Toast(text: info).show()
                 }
             }else{
                 Toast(text: "网络异常，请稍后重试").show()
@@ -47,7 +53,11 @@ class SettingViewController: UIViewController {
     }
 
     @IBAction func exit(_ sender: Any) {
-        
+        UserDefaults.standard.removeObject(forKey: "mine")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let controller = storyboard.instantiateViewController(withIdentifier: "navigation") as? UINavigationController {
+            UIApplication.shared.keyWindow?.rootViewController = controller
+        }
     }
     
     func loadData() {
@@ -56,10 +66,12 @@ class SettingViewController: UIViewController {
             [weak self] (json , error) in
             hud.hide(animated: true)
             if let object = json {
-                if let status = object["status"].int, status > 0 {
+                if let status = object["status"].int, status == 1 {
                     self?.mSwitch.isOn = true
+                    self?.type = "out"
                 }else{
                     self?.mSwitch.isOn = false
+                    self?.type = "in"
                 }
             }else{
                 Toast(text: "网络异常，请稍后重试").show()

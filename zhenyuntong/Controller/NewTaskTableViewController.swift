@@ -12,7 +12,7 @@ import Toaster
 import SwiftyJSON
 import DZNEmptyDataSet
 
-class NewTaskTableViewController: UITableViewController ,DZNEmptyDataSetDelegate , DZNEmptyDataSetSource, NewTaskSearchTableViewControllerDelegate {
+class NewTaskTableViewController: UITableViewController ,DZNEmptyDataSetDelegate , DZNEmptyDataSetSource, NewTaskSearchTableViewControllerDelegate, NewTaskTableViewCellDelegate {
     
     var page = 0
     var data : [JSON] = []
@@ -163,13 +163,15 @@ class NewTaskTableViewController: UITableViewController ,DZNEmptyDataSetDelegate
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! NewTaskTableViewCell
+        cell.delegate = self
+        cell.tag = indexPath.row
         
         if let label = cell.viewWithTag(10) as? UILabel {
             label.text = data[indexPath.row]["pjname"].string
         }
         if let label = cell.viewWithTag(11) as? UILabel {
-            label.text = ""
+            label.text = data[indexPath.row]["cust_batch"].string
         }
         if let label = cell.viewWithTag(12) as? UILabel {
             label.text = data[indexPath.row]["customer"].string
@@ -194,6 +196,7 @@ class NewTaskTableViewController: UITableViewController ,DZNEmptyDataSetDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
     
     // MARK: - Navigation
     
@@ -274,6 +277,76 @@ class NewTaskTableViewController: UITableViewController ,DZNEmptyDataSetDelegate
         self.tableView.mj_header.beginRefreshing()
     }
     
+    // MARK: - UITable view cell delegate
+    func call(tag: Int) {
+        let hud = showHUD(text: "提交中...")
+        NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appClickCall, params: ["mobile" : data[tag]["phmobile"].stringValue]){
+            [weak self] (json , error) in
+            hud.hide(animated: true)
+            if let object = json {
+                if let status = object["status"].int, status == 1 {
+                    self?.appSetStatus(tag: tag)
+                }else{
+                    if let info = object["info"].string {
+                        Toast(text: info).show()
+                    }
+                }
+            }else{
+                Toast(text: "网络异常，请稍后重试").show()
+            }
+        }
+    }
+    
+    func search(tag: Int) {
+        let hud = showHUD(text: "提交中...")
+        var params : [String : Any] = ["mobile" : data[tag]["phmobile"].stringValue, "name": data[tag]["customer"].stringValue]
+        if let cust_batch = data[tag]["cust_batch"].string {
+            params["cust_batch"] = cust_batch
+        }
+        NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appFigure, params: params){
+            [weak self] (json , error) in
+            hud.hide(animated: true)
+            if let object = json {
+                if let status = object["status"].int, status == 1 {
+                    if let arr = object["info"].array, arr.count > 0 {
+                        if let controller = self?.storyboard?.instantiateViewController(withIdentifier: "PortrayalDetail") as? PortrayalDetailTableViewController {
+                            controller.json = arr[0]
+                            self?.navigationController?.pushViewController(controller, animated: true)
+                        }
+                    }else{
+                        Toast(text: "无数据").show()
+                    }
+                }else{
+                    if let info = object["info"].string {
+                        Toast(text: info).show()
+                    }
+                }
+            }else{
+                Toast(text: "网络异常，请稍后重试").show()
+            }
+        }
+    }
+    
+    func appSetStatus(tag: Int) {
+        let hud = showHUD(text: "提交中...")
+        NetworkManager.installshared.request(type: .post, url:  NetworkManager.installshared.appSetStatus, params: ["id" : data[tag]["id"].stringValue, "type": "task", "taskid": data[tag]["task_id"].stringValue]){
+            [weak self] (json , error) in
+            hud.hide(animated: true)
+            if error != nil {
+                let alertController = UIAlertController(title: "呼叫成功，请等待回拨电话并接听", message: nil, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "确定", style: .cancel, handler:  { [weak self] (action) in
+                    if let controller = self?.storyboard?.instantiateViewController(withIdentifier: "AddFollow") as? AddFollowViewController {
+                        controller.json = self!.data[tag]
+                        self?.navigationController?.pushViewController(controller, animated: true)
+                    }
+                    
+                }))
+                self?.present(alertController, animated: true, completion: {
+                    
+                })
+            }
+        }
+    }
     
 }
 

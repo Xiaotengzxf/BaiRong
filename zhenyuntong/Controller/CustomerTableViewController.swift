@@ -167,7 +167,7 @@ class CustomerTableViewController: UITableViewController ,DZNEmptyDataSetDelegat
             label.text = data[indexPath.row]["adduser"].string
         }
         if let label = cell.viewWithTag(13) as? UILabel {
-            label.text = ""
+            label.text = data[indexPath.row]["cust_batch"].string
         }
         if let label = cell.viewWithTag(14) as? UILabel {
             label.text = data[indexPath.row]["mobile"].string
