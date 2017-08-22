@@ -59,7 +59,10 @@ class CustomerDetailTableViewController: UITableViewController, CustomDetailTabl
     
     @IBAction func showStar(_ sender: Any) {
         if level == 0 {
-            self.search(tag: 0)
+            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "PortrayalDetail") as? PortrayalDetailTableViewController {
+                controller.json = JSON(rows)
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
         }else{
             if let controller = self.storyboard?.instantiateViewController(withIdentifier: "PortrayalList") as? PortrayalTableViewController {
                 controller.hidesBottomBarWhenPushed = true
